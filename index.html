@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Volonté FC — A Football Academy in the Making</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..700&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d0e0f;
+  --ink-2:#15171a;
+  --ink-3:#1d2024;
+  --bone:#ece7dc;
+  --bone-dim:#a9a499;
+  --brass:#c79a45;
+  --brass-soft:#e0bd6e;
+  --purple:#6a2c91;
+  --purple-soft:#b18be0;
+  --line:rgba(236,231,220,.13);
+  --line-2:rgba(236,231,220,.07);
+  --serif:"Fraunces",Georgia,serif;
+  --grot:"Hanken Grotesk",system-ui,sans-serif;
+  --accent:var(--brass);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);
+  color:var(--bone);
+  font-family:var(--grot);
+  font-weight:400;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* grain overlay */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+::selection{background:var(--brass);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+.eyebrow{
+  font-family:var(--grot);font-size:.72rem;font-weight:600;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--brass);
+}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 32px;
+  background:rgba(13,14,15,0);transition:background .4s ease,padding .4s ease,border-color .4s ease;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{background:rgba(13,14,15,.82);backdrop-filter:blur(14px);padding:14px 32px;border-bottom:1px solid var(--line-2)}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-weight:600;font-size:1.15rem;letter-spacing:.01em}
+.crest{
+  width:30px;height:34px;flex:none;position:relative;
+  background:linear-gradient(160deg,var(--brass-soft),var(--brass));
+  clip-path:polygon(50% 0,100% 18%,100% 64%,50% 100%,0 64%,0 18%);
+  display:grid;place-items:center;
+}
+.crest span{font-family:var(--serif);color:var(--ink);font-weight:700;font-size:.82rem;font-style:italic}
+.brand small{display:block;font-family:var(--grot);font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:var(--bone-dim);font-weight:600;margin-top:1px}
+.nav-links{display:flex;gap:34px;align-items:center}
+.nav-links a{font-size:.82rem;font-weight:500;letter-spacing:.02em;color:var(--bone-dim);transition:color .25s}
+.nav-links a:hover{color:var(--bone)}
+.nav-cta{
+  border:1px solid var(--brass);color:var(--brass);padding:9px 18px;border-radius:40px;
+  font-size:.78rem;font-weight:600;letter-spacing:.04em;transition:.3s;
+}
+.nav-cta:hover{background:var(--brass);color:var(--ink)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.burger span{width:24px;height:2px;background:var(--bone)}
+@media(max-width:860px){.nav-links{display:none}.burger{display:flex}}
+
+/* ---------- HERO ---------- */
+header.hero{
+  position:relative;min-height:100vh;display:flex;align-items:flex-end;
+  padding-bottom:8vh;overflow:hidden;
+}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(120% 90% at 80% 10%,rgba(199,154,69,.16),transparent 55%),
+    radial-gradient(90% 80% at 5% 95%,rgba(106,44,145,.18),transparent 55%);
+}
+/* faint pitch lines */
+.pitch-lines{position:absolute;inset:0;opacity:.5}
+.pitch-lines span{position:absolute;background:var(--line-2)}
+.pl-v{top:0;bottom:0;width:1px}
+.giant{
+  position:absolute;right:-3vw;top:8vh;font-family:var(--serif);font-style:italic;
+  font-weight:300;font-size:min(42vw,560px);line-height:.8;color:var(--ink-3);
+  z-index:0;user-select:none;pointer-events:none;letter-spacing:-.03em;
+}
+.hero-inner{position:relative;z-index:2;width:100%}
+.hero-eyebrow{display:flex;gap:16px;align-items:center;margin-bottom:30px}
+.hero-eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--purple-soft);box-shadow:0 0 0 4px rgba(177,139,224,.18)}
+h1.hero-title{
+  font-family:var(--serif);font-weight:340;font-size:clamp(2.6rem,8.2vw,7.4rem);
+  line-height:.96;letter-spacing:-.02em;max-width:16ch;
+}
+h1.hero-title em{font-style:italic;color:var(--brass)}
+h1.hero-title b{font-weight:600}
+.hero-sub{
+  margin-top:34px;max-width:50ch;font-size:1.06rem;color:var(--bone-dim);line-height:1.7;
+}
+.hero-meta{
+  margin-top:46px;display:flex;gap:46px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:26px;
+}
+.hero-meta div .n{font-family:var(--serif);font-size:1.7rem;font-weight:500;color:var(--bone)}
+.hero-meta div .l{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-dim);font-weight:600;margin-top:4px}
+.scroll-hint{position:absolute;bottom:26px;right:32px;z-index:2;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-dim);writing-mode:vertical-rl;display:flex;align-items:center;gap:12px}
+.scroll-hint::after{content:"";width:1px;height:46px;background:linear-gradient(var(--brass),transparent)}
+
+/* ---------- MANIFESTO ---------- */
+.manifesto{padding:120px 0;border-top:1px solid var(--line-2)}
+.manifesto-grid{display:grid;grid-template-columns:1fr 1.7fr;gap:64px}
+.manifesto p{font-family:var(--serif);font-weight:330;font-size:clamp(1.4rem,3vw,2.15rem);line-height:1.4;letter-spacing:-.01em}
+.manifesto p .hl{color:var(--brass);font-style:italic}
+.manifesto .latin{margin-top:30px;font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--bone-dim)}
+.section-tag{font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--bone-dim);font-weight:600}
+@media(max-width:860px){.manifesto-grid{grid-template-columns:1fr;gap:28px}}
+
+/* ---------- DUAL SHOWCASE ---------- */
+.showcase{padding:40px 0 120px}
+.showcase-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:46px;flex-wrap:wrap}
+.showcase-head h2{font-family:var(--serif);font-weight:380;font-size:clamp(2rem,5vw,3.4rem);line-height:1;letter-spacing:-.02em}
+.toggle{
+  display:inline-flex;background:var(--ink-2);border:1px solid var(--line);border-radius:50px;padding:5px;position:relative;
+}
+.toggle button{
+  position:relative;z-index:2;background:none;border:none;cursor:pointer;color:var(--bone-dim);
+  font-family:var(--grot);font-weight:600;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:11px 22px;border-radius:46px;transition:color .35s;white-space:nowrap;
+}
+.toggle button.active{color:var(--ink)}
+.toggle .slider{position:absolute;top:5px;bottom:5px;left:5px;width:calc(50% - 5px);border-radius:46px;background:var(--brass);transition:transform .45s cubic-bezier(.7,0,.2,1),background .45s;z-index:1}
+.toggle[data-side="talent"] .slider{transform:translateX(100%);background:var(--purple-soft)}
+
+.panel{display:none}
+.panel.active{display:block;animation:fade .55s ease}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* talent cards */
+.roster{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.player{
+  position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  background:linear-gradient(170deg,var(--ink-2),var(--ink));aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:22px;transition:transform .4s,border-color .4s;
+}
+.player:hover{transform:translateY(-6px);border-color:var(--purple-soft)}
+.player .num{position:absolute;top:16px;right:20px;font-family:var(--serif);font-style:italic;font-size:2.6rem;color:rgba(177,139,224,.22);font-weight:500}
+.player .pos{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple-soft);font-weight:700;margin-bottom:8px}
+.player .pname{font-family:var(--serif);font-size:1.45rem;font-weight:500;line-height:1.05}
+.player .pmeta{margin-top:10px;font-size:.78rem;color:var(--bone-dim);display:flex;gap:14px;flex-wrap:wrap}
+.player .ph{position:absolute;inset:0;background:radial-gradient(70% 60% at 50% 30%,rgba(177,139,224,.1),transparent)}
+.roster-note{margin-top:24px;font-size:.85rem;color:var(--bone-dim);font-style:italic;font-family:var(--serif)}
+
+/* offering cards */
+.offerings{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.offer{
+  border:1px solid var(--line);border-radius:16px;padding:34px 30px;background:var(--ink-2);
+  position:relative;overflow:hidden;transition:transform .4s,border-color .4s;
+}
+.offer:hover{transform:translateY(-6px);border-color:var(--brass)}
+.offer::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--brass),transparent);opacity:0;transition:.4s}
+.offer:hover::before{opacity:1}
+.offer .idx{font-family:var(--serif);font-style:italic;color:var(--brass);font-size:1rem;margin-bottom:18px}
+.offer h3{font-family:var(--serif);font-weight:500;font-size:1.6rem;line-height:1.1;margin-bottom:12px}
+.offer p{font-size:.92rem;color:var(--bone-dim);line-height:1.6}
+.offer .tags{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+.offer .tags span{font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--bone-dim);border:1px solid var(--line);padding:5px 10px;border-radius:30px}
+@media(max-width:720px){.offerings{grid-template-columns:1fr}}
+
+/* ---------- ROADMAP ---------- */
+.roadmap{padding:120px 0;border-top:1px solid var(--line-2);position:relative}
+.roadmap-head{max-width:60ch;margin-bottom:60px}
+.roadmap-head h2{font-family:var(--serif);font-weight:380;font-size:clamp(2rem,5vw,3.4rem);line-height:1.02;letter-spacing:-.02em;margin:18px 0}
+.roadmap-head p{color:var(--bone-dim);font-size:1.02rem;max-width:54ch}
+.waves{display:grid;gap:0}
+.wave{display:grid;grid-template-columns:120px 1fr auto;gap:30px;align-items:start;padding:32px 0;border-top:1px solid var(--line);transition:.4s}
+.wave:last-child{border-bottom:1px solid var(--line)}
+.wave:hover{background:linear-gradient(90deg,rgba(199,154,69,.05),transparent)}
+.wave .w-id{font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--brass)}
+.wave h3{font-family:var(--serif);font-weight:500;font-size:1.55rem;margin-bottom:8px;letter-spacing:-.01em}
+.wave p{color:var(--bone-dim);font-size:.95rem;max-width:60ch}
+.wave .status{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;padding:7px 14px;border-radius:30px;white-space:nowrap;align-self:center}
+.status.now{background:var(--purple);color:var(--bone)}
+.status.next{border:1px solid var(--brass);color:var(--brass)}
+.status.future{border:1px solid var(--line);color:var(--bone-dim)}
+@media(max-width:720px){.wave{grid-template-columns:1fr;gap:10px}.wave .status{justify-self:start}}
+
+/* ---------- CTA ---------- */
+.cta{padding:130px 0;text-align:center;position:relative;overflow:hidden;border-top:1px solid var(--line-2)}
+.cta::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 80% at 50% 0%,rgba(199,154,69,.12),transparent 60%)}
+.cta-inner{position:relative;z-index:2}
+.cta h2{font-family:var(--serif);font-weight:340;font-size:clamp(2.4rem,7vw,5.4rem);line-height:.98;letter-spacing:-.025em;max-width:18ch;margin:18px auto 0}
+.cta h2 em{font-style:italic;color:var(--brass)}
+.cta p{margin:26px auto 0;max-width:46ch;color:var(--bone-dim);font-size:1.05rem}
+.btn-row{margin-top:42px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn{padding:16px 34px;border-radius:50px;font-weight:600;font-size:.9rem;letter-spacing:.03em;transition:.3s;cursor:pointer;border:1px solid var(--brass)}
+.btn.primary{background:var(--brass);color:var(--ink)}
+.btn.primary:hover{background:var(--brass-soft)}
+.btn.ghost{background:none;color:var(--brass)}
+.btn.ghost:hover{background:rgba(199,154,69,.1)}
+
+/* ---------- FOOTER ---------- */
+footer{padding:64px 0 40px;border-top:1px solid var(--line)}
+.foot-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;align-items:flex-start}
+.foot-brand{max-width:30ch}
+.foot-brand p{color:var(--bone-dim);font-size:.88rem;margin-top:16px;line-height:1.6}
+.foot-cols{display:flex;gap:64px;flex-wrap:wrap}
+.foot-col h4{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-dim);font-weight:700;margin-bottom:16px}
+.foot-col a{display:block;font-size:.9rem;color:var(--bone);margin-bottom:10px;transition:color .25s}
+.foot-col a:hover{color:var(--brass)}
+.foot-bottom{margin-top:56px;padding-top:24px;border-top:1px solid var(--line-2);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:.76rem;color:var(--bone-dim)}
+.foot-bottom .latin{font-family:var(--serif);font-style:italic}
+.socials{display:flex;gap:12px;margin-top:22px}
+.socials a{width:40px;height:40px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--bone-dim);transition:.3s}
+.socials a:hover{border-color:var(--brass);color:var(--brass);transform:translateY(-3px)}
+.socials svg{width:18px;height:18px;fill:currentColor}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.hero-eyebrow,h1.hero-title,.hero-sub,.hero-meta{opacity:0;transform:translateY(24px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+.hero-eyebrow{animation-delay:.1s}h1.hero-title{animation-delay:.25s}.hero-sub{animation-delay:.5s}.hero-meta{animation-delay:.7s}
+@keyframes rise{to{opacity:1;transform:none}}
+@media(max-width:600px){.wrap{padding:0 20px}nav{padding:16px 20px}.hero-meta{gap:28px}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="brand" href="#top">
+    <span class="crest"><span>V</span></span>
+    <span>Volonté FC<small>Académie · Toronto</small></span>
+  </a>
+  <div class="nav-links">
+    <a href="#manifesto">The Project</a>
+    <a href="#showcase">Talent &amp; Programs</a>
+    <a href="#roadmap">The Vision</a>
+    <a href="#cta" class="nav-cta">Get Involved</a>
+  </div>
+  <div class="burger" onclick="document.querySelector('.nav-links').style.display='flex'"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-bg">
+    <div class="pitch-lines">
+      <span class="pl-v" style="left:25%"></span>
+      <span class="pl-v" style="left:50%"></span>
+      <span class="pl-v" style="left:75%"></span>
+    </div>
+    <div class="giant">V</div>
+  </div>
+  <div class="wrap hero-inner">
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      <span class="eyebrow">Youth Football Academy · Markham &amp; Toronto · Ages 6 to 18</span>
+    </div>
+    <h1 class="hero-title">A football club, <em>built in the open.</em></h1>
+    <p class="hero-sub">Volonté is more than a programme. It is a project in motion: developing players, forming teams, and building the foundations of a club designed to travel, compete, and grow far beyond Ontario.</p>
+    <div class="hero-meta">
+      <div><div class="n">2026</div><div class="l">Founded</div></div>
+      <div><div class="n">6&ndash;18</div><div class="l">Player ages</div></div>
+      <div><div class="n">Two</div><div class="l">Sides: talent &amp; offering</div></div>
+      <div><div class="n">∞</div><div class="l">The ambition</div></div>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</header>
+
+<!-- MANIFESTO -->
+<section class="manifesto" id="manifesto">
+  <div class="wrap manifesto-grid">
+    <div class="reveal"><span class="section-tag">01 — The Project</span></div>
+    <div class="reveal">
+      <p>We are building a football academy from the ground up. On one side, we <span class="hl">develop the talent</span>. On the other, we deliver the <span class="hl">programmes</span> that fund and shape it. Two halves of the same pitch, moving toward one goal: teams that travel, players who rise, and a club with a name that carries.</p>
+      <p class="latin">Que ta volonté soit faite.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DUAL SHOWCASE -->
+<section class="showcase" id="showcase">
+  <div class="wrap">
+    <div class="showcase-head reveal">
+      <h2>Two sides of the<br>academy.</h2>
+      <div class="toggle" id="toggle" data-side="offering">
+        <span class="slider"></span>
+        <button class="active" data-panel="offering" onclick="setSide('offering')">The Offering</button>
+        <button data-panel="talent" onclick="setSide('talent')">The Talent</button>
+      </div>
+    </div>
+
+    <!-- OFFERING PANEL -->
+    <div class="panel active" id="panel-offering">
+      <div class="offerings">
+        <div class="offer reveal">
+          <div class="idx">i.</div>
+          <h3>Private Coaching</h3>
+          <p>One to one and small group sessions built around the individual player. Technical detail, decision making, and confidence, developed at the player's own pace.</p>
+          <div class="tags"><span>1:1</span><span>Small group</span><span>All ages</span></div>
+        </div>
+        <div class="offer reveal">
+          <div class="idx">ii.</div>
+          <h3>Competitive Teams &amp; Travel</h3>
+          <p>We form squads and take them on the road to play tournaments. Real matches, real opposition, and the experience of competing as a team that wears the crest.</p>
+          <div class="tags"><span>Squads</span><span>Tournaments</span><span>Travel</span></div>
+        </div>
+        <div class="offer reveal">
+          <div class="idx">iii.</div>
+          <h3>After School Skills Programme</h3>
+          <p>A structured weekly programme for younger players. A consistent touch on the ball, an introduction to the game, and a first home inside the academy.</p>
+          <div class="tags"><span>Weekly</span><span>Foundations</span></div>
+        </div>
+        <div class="offer reveal">
+          <div class="idx">iv.</div>
+          <h3>Small Sided Games &amp; Camps</h3>
+          <p>Small sided games and a summer camp alternative that keeps players sharp through the breaks. More touches, more decisions, more joy in the game.</p>
+          <div class="tags"><span>Summer</span><span>Holiday camps</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TALENT PANEL -->
+    <div class="panel" id="panel-talent">
+      <div class="roster">
+        <div class="player reveal"><div class="ph"></div><div class="num">10</div><div class="pos">Attacking Mid</div><div class="pname">Player Name</div><div class="pmeta"><span>U14</span><span>Markham</span></div></div>
+        <div class="player reveal"><div class="ph"></div><div class="num">7</div><div class="pos">Winger</div><div class="pname">Player Name</div><div class="pmeta"><span>U12</span><span>Toronto</span></div></div>
+        <div class="player reveal"><div class="ph"></div><div class="num">4</div><div class="pos">Centre Back</div><div class="pname">Player Name</div><div class="pmeta"><span>U16</span><span>Markham</span></div></div>
+        <div class="player reveal"><div class="ph"></div><div class="num">9</div><div class="pos">Striker</div><div class="pname">Player Name</div><div class="pmeta"><span>U18</span><span>Toronto</span></div></div>
+        <div class="player reveal"><div class="ph"></div><div class="num">1</div><div class="pos">Goalkeeper</div><div class="pname">Player Name</div><div class="pmeta"><span>U14</span><span>Markham</span></div></div>
+        <div class="player reveal"><div class="ph"></div><div class="num">8</div><div class="pos">Central Mid</div><div class="pname">Player Name</div><div class="pmeta"><span>U12</span><span>Toronto</span></div></div>
+      </div>
+      <p class="roster-note">Placeholder profiles. Swap in real players, photos, age groups, and short scouting notes as the academy grows.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="roadmap" id="roadmap">
+  <div class="wrap">
+    <div class="roadmap-head reveal">
+      <span class="section-tag">03 — The Vision</span>
+      <h2>Built in waves.</h2>
+      <p>Volonté is designed to grow in deliberate stages, inspired by multi club models like City Football Group and Red Bull. Each wave lays the groundwork for the next.</p>
+    </div>
+    <div class="waves">
+      <div class="wave reveal">
+        <div class="w-id">Wave 01</div>
+        <div><h3>Foundation</h3><p>Incorporation, brand, and the first programmes. Private coaching, after school skills, and small sided games launch in Markham and Toronto.</p></div>
+        <div class="status now">In progress</div>
+      </div>
+      <div class="wave reveal">
+        <div class="w-id">Wave 02</div>
+        <div><h3>Teams that travel</h3><p>Competitive squads formed across age groups, taken on the road to play tournaments and represent the crest beyond local play.</p></div>
+        <div class="status next">Next</div>
+      </div>
+      <div class="wave reveal">
+        <div class="w-id">Wave 03</div>
+        <div><h3>Provincial expansion</h3><p>New sites and partnerships extend Volonté across Ontario and into other provinces, building a recognised Canada wide identity.</p></div>
+        <div class="status future">Horizon</div>
+      </div>
+      <div class="wave reveal">
+        <div class="w-id">Wave 04</div>
+        <div><h3>The multi club model</h3><p>International hubs and a connected family of clubs sharing one philosophy, one method, and one ambition.</p></div>
+        <div class="status future">Horizon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="wrap cta-inner">
+    <span class="eyebrow">Get Involved</span>
+    <h2>Develop a player. <em>Or join the build.</em></h2>
+    <p>Whether you are a parent looking for coaching, a player ready to compete, or a partner who sees the vision, there is a place for you inside Volonté.</p>
+    <div class="btn-row">
+      <a class="btn primary" href="mailto:admin@lavolontefc.com">Enquire about programmes</a>
+      <a class="btn ghost" href="#showcase">Explore the academy</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top">
+          <span class="crest"><span>V</span></span>
+          <span>Volonté FC<small>Académie · Toronto</small></span>
+        </a>
+        <p>A youth football academy building players, teams, and a club with national ambition. Markham and Toronto, Ontario.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.17.4.37 1 .42 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.05 1.2-.25 1.8-.42 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.17-1 .37-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.05-1.8-.25-2.2-.42-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.17-.4-.37-1-.42-2.2C2.21 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.2.25-1.8.42-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.17 1-.37 2.2-.42C8.4 2.21 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.07-.9.04-1.4.2-1.7.32-.43.17-.74.36-1.06.68-.32.32-.5.63-.68 1.06-.12.3-.28.8-.32 1.7C3.27 8.5 3.26 8.9 3.26 12s0 3.5.07 4.7c.04.9.2 1.4.32 1.7.17.43.36.74.68 1.06.32.32.63.5 1.06.68.3.12.8.28 1.7.32 1.2.06 1.6.07 4.7.07s3.5 0 4.7-.07c.9-.04 1.4-.2 1.7-.32.43-.17.74-.36 1.06-.68.32-.32.5-.63.68-1.06.12-.3.28-.8.32-1.7.06-1.2.07-1.6.07-4.7s0-3.5-.07-4.7c-.04-.9-.2-1.4-.32-1.7a2.8 2.8 0 0 0-.68-1.06 2.8 2.8 0 0 0-1.06-.68c-.3-.12-.8-.28-1.7-.32C15.5 4 15.1 4 12 4zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm0 1.8a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2zm5.1-2.4a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3z"/></svg></a>
+          <a href="#" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24"><path d="M23 7.5c-.26-1-1.03-1.78-2.02-2.04C19.2 5 12 5 12 5s-7.2 0-8.98.46C2.03 5.72 1.26 6.5 1 7.5.55 9.3.55 12 .55 12s0 2.7.45 4.5c.26 1 1.03 1.78 2.02 2.04C4.8 19 12 19 12 19s7.2 0 8.98-.46c.99-.26 1.76-1.04 2.02-2.04.45-1.8.45-4.5.45-4.5s0-2.7-.45-4.5zM9.75 15.4V8.6l6 3.4-6 3.4z"/></svg></a>
+          <a href="#" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24"><path d="M16.6 5.8a4.3 4.3 0 0 1-1-2.8h-3.1v12.4a2.5 2.5 0 1 1-2.5-2.5c.26 0 .5.04.74.11V9.8a5.6 5.6 0 0 0-.74-.05A5.6 5.6 0 1 0 15.6 15.4V9.2a7.3 7.3 0 0 0 4.3 1.4V7.5a4.3 4.3 0 0 1-3.3-1.7z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4>Academy</h4>
+          <a href="#manifesto">The Project</a>
+          <a href="#showcase">The Offering</a>
+          <a href="#showcase">The Talent</a>
+          <a href="#roadmap">The Vision</a>
+        </div>
+        <div class="foot-col">
+          <h4>Connect</h4>
+          <a href="mailto:admin@lavolontefc.com">admin@lavolontefc.com</a>
+          <a href="#">Instagram</a>
+          <a href="#">YouTube</a>
+          <a href="#">TikTok</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 La Volonté de Dieu Football Club Limited. All rights reserved.</span>
+      <span class="latin">Thy will be done.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// nav scroll
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
+
+// toggle
+function setSide(side){
+  document.getElementById('toggle').dataset.side=side;
+  document.querySelectorAll('.toggle button').forEach(b=>b.classList.toggle('active',b.dataset.panel===side));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+side).classList.add('active');
+  // re-trigger reveals inside the panel
+  document.querySelectorAll('#panel-'+side+' .reveal').forEach(el=>{el.classList.add('in')});
+}
+
+// reveal on scroll
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
