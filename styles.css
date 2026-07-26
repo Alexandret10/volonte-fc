@@ -153,7 +153,7 @@ h1.hero-title em{font-style:italic;color:var(--purple-soft)}
 .coach p{color:var(--bone-dim);font-size:.92rem;line-height:1.6}
 
 .spotlight{margin-top:26px;border:1px solid rgba(177,139,224,.3);border-radius:18px;background:linear-gradient(135deg,rgba(106,44,145,.16),var(--ink-2));padding:40px;display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center}
-.spotlight .sp-photo{width:150px;height:190px;border-radius:14px;background:radial-gradient(70% 60% at 50% 30%,rgba(177,139,224,.28),var(--ink-3));display:grid;place-items:center;flex:none}
+.spotlight .sp-photo{width:230px;height:300px;border-radius:14px;background:radial-gradient(70% 60% at 50% 30%,rgba(177,139,224,.28),var(--ink-3));display:grid;place-items:center;flex:none}
 .spotlight .sp-photo span{font-family:var(--serif);font-style:italic;font-size:3rem;color:rgba(236,231,220,.4)}
 .spotlight .sp-tag{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple-soft);font-weight:700}
 .spotlight h3{font-family:var(--serif);font-weight:500;font-size:2rem;margin:10px 0}
